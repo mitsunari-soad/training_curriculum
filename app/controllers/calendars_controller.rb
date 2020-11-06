@@ -8,12 +8,10 @@ class CalendarsController < ApplicationController
 
   # 予定の保存
   def create
-    #binding.pry
     Plan.create(plan_params)
     redirect_to action: :index
   end
 
-  
   private
 
   def plan_params
@@ -33,8 +31,10 @@ class CalendarsController < ApplicationController
 
     plans = Plan.where(date: @todays_date..@todays_date + 6)
     
+
     7.times do |x|
       today_plans = []
+      weeks_wday = wdays[Date.today.wday - 7 + x]
       plan = plans.map do |plan|
         today_plans.push(plan.plan) 
         if plan.date == @todays_date + x
@@ -42,8 +42,15 @@ class CalendarsController < ApplicationController
       end
 
       
+<<<<<<< HEAD
+      days = {month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans, wday: weeks_wday }
+=======
       days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans, :wday => wdays[Date.today.wday - 7 + x]}
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> 7e64b7d1187dad7aeac6fd2cb06fd1d0376d69d8
+>>>>>>> Stashed changes
       @week_days.push(days)
     end
 
